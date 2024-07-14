@@ -42,10 +42,10 @@ public class UserController {
         if (users.containsKey(user.getId())) {
             checkUserLogin(user);
             users.put(user.getId(), user);
-            log.info("Пользователь с id = {} обновлен успешно", user.getId());
+            log.info("Пользователь с id = {} успешно обновлен", user.getId());
         } else {
             log.warn("Пользователь с id {} не обновлен, т.к. не зарегистрирован", user.getId());
-            throw new ValidationException("Такого пользователя не существует, невозможно обновить данные пользователя.");
+            throw new ValidationException("Невозможно обновить данные пользователя. Такого пользователя не существует");
         }
         return user;
     }
@@ -62,10 +62,10 @@ public class UserController {
         String mail = user.getEmail();
         if (mail == null || mail.isBlank()) {
             log.warn("Пользователь с id = {} не указал электронную почту", user.getId());
-            throw new ValidationException("Электронная почта не указана");
+            throw new ValidationException("Не указана электронная почта");
         } else if (!mail.contains("@")) {
             log.warn("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
-            throw new ValidationException("Электронная почта указана некорректно");
+            throw new ValidationException("Электронная почта указана неверно");
         } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
             log.warn("Пользователь с id = {} не указал логин", user.getId());
             throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");

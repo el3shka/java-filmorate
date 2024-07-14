@@ -17,46 +17,46 @@ class UserTest {
     public void prepareData() {
         userTestObject = User.builder()
                 .id(1L)
-                .email("harv3st3r666@gmail.com")
-                .login("el3shka")
+                .email("harv3st3r@gmail.com")
+                .login("el3shque")
                 .birthday(LocalDate.of(1994, 7, 4))
-                .name("pwnztriplesix")
+                .name("Харвэстэр")
                 .build();
     }
     @Test
     public void emailValidateTest() {
         userTestObject.setEmail(null);
         Exception exceptionNullEmail = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Не указана электронная почта.", exceptionNullEmail.getMessage());
+        assertEquals("Не указана электронная почта", exceptionNullEmail.getMessage());
 
 
         userTestObject.setEmail("");
         Exception exceptionEmptyEmail = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Не указана электронная почта.", exceptionEmptyEmail.getMessage());
+        assertEquals("Не указана электронная почта", exceptionEmptyEmail.getMessage());
 
 
         userTestObject.setEmail("   ");
         Exception exceptionEmailFromSpaces = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Не указана электронная почта.", exceptionEmailFromSpaces.getMessage());
+        assertEquals("Не указана электронная почта", exceptionEmailFromSpaces.getMessage());
 
-        userTestObject.setEmail("el3shka@gmail.com");
+        userTestObject.setEmail("harv3st3rgmail.com");
         Exception exceptionEmailWithoutDog = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Электронная почта указана некорректно.", exceptionEmailWithoutDog.getMessage());
+        assertEquals("Электронная почта указана неверно", exceptionEmailWithoutDog.getMessage());
     }
 
     @Test
     public void loginValidateTest() {
         userTestObject.setLogin(null);
         Exception exceptionNullLogin = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Логин не может быть пустым или содержать пробелы.", exceptionNullLogin.getMessage());
+        assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionNullLogin.getMessage());
 
         userTestObject.setLogin("");
         Exception exceptionEmptyLogin = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Логин не может быть пустым или содержать пробелы.", exceptionEmptyLogin.getMessage());
+        assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionEmptyLogin.getMessage());
 
-        userTestObject.setLogin("В логине присутствует пробел.");
+        userTestObject.setLogin("Логин содержит пробел.");
         Exception exceptionLoginWithSpace = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Логин не может быть пустым или содержать пробелы.", exceptionLoginWithSpace.getMessage());
+        assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionLoginWithSpace.getMessage());
     }
     @Test
     public void nameValidateTest() {
@@ -70,9 +70,9 @@ class UserTest {
     }
     @Test
     public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.of(2024,3,7));
+        userTestObject.setBirthday(LocalDate.of(2001,2,4));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Дата рождения введена неккоректно.", exceptionBirthdayInFuture.getMessage());
+        assertEquals("INFO: Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
     }
     @Test
     public void successfulValidateUserTest() {
