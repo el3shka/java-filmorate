@@ -18,6 +18,7 @@ public class FilmController {
     private static final LocalDate THE_FIRST_FILM_REALISE_DATE = LocalDate.of(1895, 12, 28);
     protected final Map<Long, Film> films = new HashMap<>();
     protected Long idFilmGen = 1L;
+    
     @GetMapping
     public List<Film> findAll() {
         return new ArrayList<>(films.values());
@@ -50,10 +51,10 @@ public class FilmController {
         if (film.getName() == null || film.getName().isBlank()) {
             log.warn("В фильме с id = {} необходимо название", film.getId());
             throw new ValidationException("Название фильма не должно быть пустым или состоять из пробелов");
-        } else if (film.getDescription()==null || film.getDescription().length() > 200) {
+        } else if (film.getDescription() == null || film.getDescription().length() > 200) {
             log.warn("В фильме с id = {} превышение длины описания", film.getId());
             throw new ValidationException("Длина описания фильма не должна превышать 200 символов");
-        } else if (film.getReleaseDate()==null || film.getReleaseDate().isBefore(THE_FIRST_FILM_REALISE_DATE)) {
+        } else if (film.getReleaseDate() == null || film.getReleaseDate().isBefore(THE_FIRST_FILM_REALISE_DATE)) {
             log.warn("В фильме с id = {} дата релиза некорректна", film.getId());
             throw new ValidationException("Дата релиза некорректна");
         } else if (film.getDuration() <= 0) {
