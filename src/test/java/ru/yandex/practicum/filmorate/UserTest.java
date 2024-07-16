@@ -19,7 +19,7 @@ class UserTest {
                 .id(1L)
                 .email("harv3st3r666@gmail.com")
                 .login("el3shka")
-                .birthday(LocalDate.of(2994, 7, 4))
+                .birthday(LocalDate.of(1994, 7, 4))
                 .name("pwnztriplesix")
                 .build();
     }
