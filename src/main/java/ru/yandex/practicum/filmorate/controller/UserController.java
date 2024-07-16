@@ -62,13 +62,13 @@ public class UserController {
         String mail = user.getEmail();
         if (mail == null || mail.isBlank()) {
             log.info("Пользователь с id = {} не указал электронную почту", user.getId());
-            throw new ValidationException("Не указана электронная почта");
+            throw new ValidationException("Не указана электронная почта.");
         } else if (!mail.contains("@")) {
             log.info("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
-            throw new ValidationException("Электронная почта указана неверно");
+            throw new ValidationException("Электронная почта указана некорректно.");
         } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
             log.info("Пользователь с id = {} не указал логин", user.getId());
-            throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");
+            throw new ValidationException("Логин не может быть пустым или содержать пробелы.");
         } else if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
