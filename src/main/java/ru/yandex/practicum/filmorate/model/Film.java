@@ -10,8 +10,7 @@ import java.time.LocalDate;
 /**
  * Film.
  */
-@Getter
-@Setter
+
 @Data
 @Builder
 public class Film {
