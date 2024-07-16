@@ -49,10 +49,8 @@ public class FilmController {
         return film;
     }
 
-    public static void validateFilm(Film film)
-    {
-        if (film.getName() == null || film.getName().isBlank())
-        {
+    public static void validateFilm(Film film) {
+        if (film.getName() == null || film.getName().isBlank()) {
             log.info("В фильме с id = {} необходимо название", film.getId());
             throw new ValidationException("Название фильма не может быть пустым или состоять из пробелов");
         } else if (film.getDescription() == null) {
