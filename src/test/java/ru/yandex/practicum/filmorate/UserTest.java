@@ -17,7 +17,7 @@ class UserTest {
     public void prepareData() {
         userTestObject = User.builder()
                 .id(1L)
-                .email("harv3st3r666@gmail.com")
+                .email("el3shka@gmail.com")
                 .login("el3shka")
                 .birthday(LocalDate.of(1994, 7, 4))
                 .name("pwnztriplesix")
@@ -40,7 +40,7 @@ class UserTest {
         Exception exceptionEmailFromSpaces = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Не указана электронная почта.", exceptionEmailFromSpaces.getMessage());
 
-        userTestObject.setEmail("el3shka@gmail.com");
+        userTestObject.setEmail("el3shkagmail.com");
         Exception exceptionEmailWithoutDog = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Электронная почта указана некорректно.", exceptionEmailWithoutDog.getMessage());
     }
