@@ -44,7 +44,7 @@ public class UserController {
             users.put(user.getId(), user);
             log.info("Пользователь с id = {} успешно обновлен", user.getId());
         } else {
-            log.warn("Пользователь с id {} не обновлен, т.к. не зарегистрирован", user.getId());
+            log.info("Пользователь с id {} не обновлен, т.к. не зарегистрирован", user.getId());
             throw new ValidationException("Невозможно обновить данные пользователя. Такого пользователя не существует");
         }
         return user;
@@ -61,19 +61,19 @@ public class UserController {
     public static void validateUser(User user) {
         String mail = user.getEmail();
         if (mail == null || mail.isBlank()) {
-            log.warn("Пользователь с id = {} не указал электронную почту", user.getId());
+            log.info("Пользователь с id = {} не указал электронную почту", user.getId());
             throw new ValidationException("Не указана электронная почта");
         } else if (!mail.contains("@")) {
-            log.warn("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
+            log.info("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
             throw new ValidationException("Электронная почта указана неверно");
         } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
-            log.warn("Пользователь с id = {} не указал логин", user.getId());
+            log.info("Пользователь с id = {} не указал логин", user.getId());
             throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");
         } else if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
         } else if (user.getBirthday() == null || user.getBirthday().isAfter(LocalDate.now())) {
-            log.warn("Пользователь с id = {} некорректно указал дату рождения", user.getId());
+            log.info("Пользователь с id = {} некорректно указал дату рождения", user.getId());
             throw new ValidationException("Неккоректно введена дата рождения");
         }
         log.info("Пользователь с id = {} успешно прошел валидацию", user.getId());

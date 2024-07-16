@@ -46,6 +46,7 @@ class FilmTest {
         assertEquals("Длина описания фильма не должна превышать 200 символов.",
                 exceptionTooLongDescription.getMessage());
     }
+
     @Test
     public void durationValidateTest() {
         filmTestObject.setDuration(-120);
