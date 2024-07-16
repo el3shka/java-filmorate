@@ -23,7 +23,7 @@ class UserTest {
                 .name("pwnztriplesix")
                 .build();
     }
-    
+
     @Test
     public void emailValidateTest() {
         userTestObject.setEmail(null);
@@ -59,7 +59,7 @@ class UserTest {
         Exception exceptionLoginWithSpace = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Логин не может быть пустым или содержать пробелы.", exceptionLoginWithSpace.getMessage());
     }
-    
+
     @Test
     public void nameValidateTest() {
         userTestObject.setName(null);
@@ -70,14 +70,14 @@ class UserTest {
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
     }
-    
+
     @Test
     public void birthdayValidateTest() {
         userTestObject.setBirthday(LocalDate.of(2024,3,7));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Дата рождения введена неккоректно.", exceptionBirthdayInFuture.getMessage());
     }
-    
+
     @Test
     public void successfulValidateUserTest() {
         assertDoesNotThrow(() -> UserController.validateUser(userTestObject));
