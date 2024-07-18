@@ -72,8 +72,8 @@ public class UserController {
             log.info("Пользователь с id = {} не указал логин", user.getId());
             throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");
         }
-        if (user.getName() == null || user.getName().contains("    ") || user.getName().contains(" ") || user.getName().isBlank()) {
-            // } else if (user.getName() == null || user.getName().isBlank()) {
+        //if (user.getName() == null || user.getName().contains("    ") || user.getName().contains(" ") || user.getName().isBlank()) {
+            if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
         }
