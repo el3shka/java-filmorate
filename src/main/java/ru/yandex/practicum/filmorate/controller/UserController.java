@@ -64,7 +64,7 @@ public class UserController {
             log.info("Пользователь с id = {} не указал электронную почту", user.getId());
             throw new ValidationException("Не указана электронная почта.");
         } else if (!mail.contains("@")) {
-            log.info("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
+            log.warn("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
             throw new ValidationException("Электронная почта указана некорректно.");
         } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
             log.info("Пользователь с id = {} не указал логин", user.getId());
