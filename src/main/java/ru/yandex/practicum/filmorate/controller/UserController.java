@@ -72,7 +72,7 @@ public class UserController {
         } else if (user.getName() == null || user.getName().isEmpty()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
-        } else if (user.getBirthday() == null || user.getBirthday().isAfter(LocalDate.now())) {
+        } else if (user.getBirthday().isAfter(LocalDate.now())) {
             log.info("Пользователь с id = {} некорректно указал дату рождения", user.getId());
             throw new ValidationException("Неккоректно введена дата рождения");
         }
