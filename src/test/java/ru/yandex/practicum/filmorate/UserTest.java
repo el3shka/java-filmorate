@@ -59,7 +59,6 @@ class UserTest {
         userTestObject.setLogin(" ");
         Exception exceptionLoginWithSpace = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionLoginWithSpace.getMessage());
-
     }
 
     @Test
@@ -80,9 +79,7 @@ class UserTest {
         userTestObject.setName(" ");
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
-
     }
-
     @Test
     public void successfulValidateUserTest() {
         assertDoesNotThrow(() -> UserController.validateUser(userTestObject));
