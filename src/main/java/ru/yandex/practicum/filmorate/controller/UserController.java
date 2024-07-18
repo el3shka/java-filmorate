@@ -69,7 +69,7 @@ public class UserController {
         } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
             log.info("Пользователь с id = {} не указал логин", user.getId());
             throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");
-        } else if (user.getName() == null || user.getName().isBlank()) {
+        } else if (user.getName() == null || user.getName().isEmpty()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
         } else if (user.getBirthday() == null || user.getBirthday().isAfter(LocalDate.now())) {

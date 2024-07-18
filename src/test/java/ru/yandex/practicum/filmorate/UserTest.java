@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.controller.FilmController;
 import ru.yandex.practicum.filmorate.controller.UserController;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
@@ -19,9 +18,9 @@ class UserTest {
         userTestObject = User.builder()
                 .id(1L)
                 .email("el3shque@gmail.com")
-                .login("el3shque")
+                .login("login")
                 .birthday(LocalDate.of(1994, 7, 4))
-                .name("Харвэстэр")
+                .name(" ")
                 .build();
     }
 
@@ -59,10 +58,12 @@ class UserTest {
         userTestObject.setLogin("Логин содержит пробел.");
         Exception exceptionLoginWithSpace = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionLoginWithSpace.getMessage());
+
     }
 
     @Test
     public void nameValidateTest() {
+
         userTestObject.setName(null);
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
@@ -70,11 +71,12 @@ class UserTest {
         userTestObject.setName("");
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
+
     }
 
     @Test
     public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.of(2994, 7, 4));
+        userTestObject.setBirthday(LocalDate.of(2994, 7, 24));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
     }
