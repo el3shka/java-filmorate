@@ -80,6 +80,7 @@ class UserTest {
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
     }
+
     @Test
     public void successfulValidateUserTest() {
         assertDoesNotThrow(() -> UserController.validateUser(userTestObject));
