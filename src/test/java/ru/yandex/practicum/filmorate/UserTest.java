@@ -40,7 +40,7 @@ class UserTest {
         Exception exceptionEmailFromSpaces = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Не указана электронная почта.", exceptionEmailFromSpaces.getMessage());
 
-        userTestObject.setEmail("el3shkagmail.com");
+        userTestObject.setEmail("postmail.com");
         Exception exceptionEmailWithoutDog = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Электронная почта указана некорректно.", exceptionEmailWithoutDog.getMessage());
     }
@@ -73,7 +73,7 @@ class UserTest {
 
     @Test
     public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.of(2994,7,4));
+        userTestObject.setBirthday(LocalDate.of(4998,7,4));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Дата рождения введена неккоректно.", exceptionBirthdayInFuture.getMessage());
     }
