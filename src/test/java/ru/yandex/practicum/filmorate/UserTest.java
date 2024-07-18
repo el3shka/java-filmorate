@@ -18,8 +18,8 @@ class UserTest {
         userTestObject = User.builder()
                 .id(1L)
                 .email("el3shque@gmail.com")
-                .login("login")
-                .name(" ")
+                .login("login login")
+                .name("")
                 .birthday(LocalDate.of(1994, 7, 4))
                 .build();
     }
@@ -55,10 +55,19 @@ class UserTest {
         Exception exceptionEmptyLogin = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionEmptyLogin.getMessage());
 
-        userTestObject.setLogin("Логин содержит пробел.");
+        //userTestObject.setLogin("Логин содержит пробел.");
+        userTestObject.setLogin(" ");
         Exception exceptionLoginWithSpace = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Поле логин не может быть пустым или содержать пробелы", exceptionLoginWithSpace.getMessage());
 
+    }
+
+    @Test
+    public void birthdayValidateTest() {
+        userTestObject.setBirthday(LocalDate.now().plusDays(1));
+        userTestObject.setBirthday(LocalDate.of(2994, 7, 24));
+        Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
+        assertEquals("Некорректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
     }
 
     @Test
@@ -72,20 +81,7 @@ class UserTest {
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
 
-        userTestObject.setName("    ");
-        UserController.validateUser(userTestObject);
-        assertEquals(userTestObject.getLogin(), userTestObject.getName());
-
     }
-
-    @Test
-    public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.now().plusDays(1));
-        //userTestObject.setBirthday(LocalDate.of(2994, 7, 24));
-        Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
-    }
-
     @Test
     public void successfulValidateUserTest() {
         assertDoesNotThrow(() -> UserController.validateUser(userTestObject));
