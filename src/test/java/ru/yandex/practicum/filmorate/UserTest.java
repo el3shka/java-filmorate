@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.filmorate.controller.FilmController;
 import ru.yandex.practicum.filmorate.controller.UserController;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
@@ -17,7 +18,7 @@ class UserTest {
     public void prepareData() {
         userTestObject = User.builder()
                 .id(1L)
-                .email("harv3st3r@gmail.com")
+                .email("el3shque@gmail.com")
                 .login("el3shque")
                 .birthday(LocalDate.of(1994, 7, 4))
                 .name("Харвэстэр")
@@ -40,7 +41,7 @@ class UserTest {
         Exception exceptionEmailFromSpaces = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Не указана электронная почта", exceptionEmailFromSpaces.getMessage());
 
-        userTestObject.setEmail("harv3st3rgmail.com");
+        userTestObject.setEmail("harv3mail.com");
         Exception exceptionEmailWithoutDog = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Электронная почта указана неверно", exceptionEmailWithoutDog.getMessage());
     }
@@ -73,9 +74,9 @@ class UserTest {
 
     @Test
     public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.of(2001,2,4));
+        userTestObject.setBirthday(LocalDate.of(2994, 7, 4));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
-        assertEquals("INFO: Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
+        assertEquals("Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
     }
 
     @Test
