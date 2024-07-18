@@ -20,7 +20,7 @@ class UserTest {
                 .email("el3shque@gmail.com")
                 .login("login")
                 .birthday(LocalDate.of(1994, 7, 4))
-                .name(" ")
+                .name("name")
                 .build();
     }
 
