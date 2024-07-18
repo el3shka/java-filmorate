@@ -82,7 +82,8 @@ class UserTest {
     }
 
     @Test
-        public void successfulValidateUserTest() {
+    public void successfulValidateUserTest() {
+
         assertDoesNotThrow(() -> UserController.validateUser(userTestObject));
     }
 }
