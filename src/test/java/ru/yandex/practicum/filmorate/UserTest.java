@@ -19,8 +19,8 @@ class UserTest {
                 .id(1L)
                 .email("el3shque@gmail.com")
                 .login("login")
+                .name(" ")
                 .birthday(LocalDate.of(1994, 7, 4))
-                .name("name")
                 .build();
     }
 
@@ -36,7 +36,7 @@ class UserTest {
         assertEquals("Не указана электронная почта", exceptionEmptyEmail.getMessage());
 
 
-        userTestObject.setEmail("   ");
+        userTestObject.setEmail(" ");
         Exception exceptionEmailFromSpaces = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Не указана электронная почта", exceptionEmailFromSpaces.getMessage());
 
@@ -68,7 +68,11 @@ class UserTest {
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
 
-        userTestObject.setName("");
+        userTestObject.setName(" ");
+        UserController.validateUser(userTestObject);
+        assertEquals(userTestObject.getLogin(), userTestObject.getName());
+
+        userTestObject.setName("    ");
         UserController.validateUser(userTestObject);
         assertEquals(userTestObject.getLogin(), userTestObject.getName());
 
@@ -76,7 +80,8 @@ class UserTest {
 
     @Test
     public void birthdayValidateTest() {
-        userTestObject.setBirthday(LocalDate.of(2994, 7, 24));
+        userTestObject.setBirthday(LocalDate.now().plusDays(1));
+        //userTestObject.setBirthday(LocalDate.of(2994, 7, 24));
         Exception exceptionBirthdayInFuture = assertThrows(ValidationException.class, () -> UserController.validateUser(userTestObject));
         assertEquals("Неккоректно введена дата рождения", exceptionBirthdayInFuture.getMessage());
     }

@@ -63,17 +63,22 @@ public class UserController {
         if (mail == null || mail.isBlank()) {
             log.info("Пользователь с id = {} не указал электронную почту", user.getId());
             throw new ValidationException("Не указана электронная почта");
-        } else if (!mail.contains("@")) {
+        }
+        if (!mail.contains("@")) {
             log.info("Электронная почта для пользователя с id = {} указана некорректно", user.getId());
             throw new ValidationException("Электронная почта указана неверно");
-        } else if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
+        }
+        if (user.getLogin() == null || user.getLogin().contains(" ") || user.getLogin().isBlank()) {
             log.info("Пользователь с id = {} не указал логин", user.getId());
             throw new ValidationException("Поле логин не может быть пустым или содержать пробелы");
-        } else if (user.getName() == null || user.getName().isEmpty()) {
+        }
+        if (user.getName() == null || user.getName().contains("    ") || user.getName().contains(" ") || user.getName().isBlank()) {
+            // } else if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
             log.info("В качестве имени пользователя с id = {} будет использоваться логин", user.getId());
-        } else if (user.getBirthday().isAfter(LocalDate.now())) {
-            log.info("Пользователь с id = {} некорректно указал дату рождения", user.getId());
+        }
+        if (user.getBirthday().isAfter(LocalDate.now())) {
+            log.warn("Пользователь с id = {} некорректно указал дату рождения", user.getId());
             throw new ValidationException("Неккоректно введена дата рождения");
         }
         log.info("Пользователь с id = {} успешно прошел валидацию", user.getId());
