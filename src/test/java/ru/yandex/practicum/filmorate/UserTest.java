@@ -15,13 +15,7 @@ class UserTest {
 
     @BeforeEach
     public void prepareData() {
-        userTestObject = User.builder()
-                .id(1L)
-                .email("el3shque@gmail.com")
-                .login("login login")
-                .name("")
-                .birthday(LocalDate.of(1994, 7, 4))
-                .build();
+        userTestObject = User.builder().id(1L).email("el3shque@gmail.com").login("login login").name("").birthday(LocalDate.of(1994, 7, 4)).build();
     }
 
     @Test
