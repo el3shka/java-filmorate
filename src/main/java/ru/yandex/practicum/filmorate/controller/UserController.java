@@ -20,8 +20,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public void create(@RequestBody User user) {
+        userService.create(user);
     }
 
     @PutMapping

@@ -40,7 +40,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongRealiseData() {
-		final Film film = new Film(1, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
+		final Film film = new Film(0, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
 				LocalDate.of(1800, 1, 1), 100);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -85,7 +85,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void emptyEmail() {
-		User user = new User(1, null, "login", "Виталя",
+		User user = new User(0, null, "login", "Виталя",
 				LocalDate.of(1990, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
@@ -94,7 +94,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void emptyLogin() {
-		User user = new User(1, "123@ya.ru", "", "Виталя",
+		User user = new User(null, "123@ya.ru", "", "Виталя",
 				LocalDate.of(1990, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
