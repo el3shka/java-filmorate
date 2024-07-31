@@ -24,7 +24,7 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return getUsers().values();
+        return (List<User>) getUsers().values();
     }
 
     public User create(User user) {
