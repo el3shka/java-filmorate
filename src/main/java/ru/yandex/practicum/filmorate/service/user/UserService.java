@@ -23,8 +23,8 @@ public class UserService {
         return inMemoryUserStorage.getUsers();
     }
 
-    public List<User> findAll() {
-        return (List<User>) getUsers().values();
+    public Collection<User> findAll() {
+        return getUsers().values();
     }
 
     public User create(User user) {
