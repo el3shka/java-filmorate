@@ -21,11 +21,7 @@ public class Film {
     Set<Integer> likes = new HashSet<>();
 
     public Film(Integer id, String name, String description, LocalDate releaseDate, Integer duration) {
-        if (id == 0) {
-            this.id = 1; // Если ID равен 0, устанавливаем его равным 1
-        } else {
-            this.id = id;
-        }
+        this.id = id;
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
