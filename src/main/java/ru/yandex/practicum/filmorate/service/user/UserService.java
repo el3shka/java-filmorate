@@ -149,7 +149,7 @@ public class UserService {
                 .stream()
                 .mapToInt(id -> id)
                 .max()
-                .orElse(1);
+                .orElse(0);
         return ++currentMaxId;
     }
 }
