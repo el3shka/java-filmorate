@@ -1,6 +1,8 @@
 package ru.yandex.practicum.filmorate.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -15,10 +17,9 @@ import java.util.List;
 @RequestMapping("/films")
 public class FilmController {
     private final FilmService filmService;
-    protected Long id;
-    {
-        id = 1L;
-    }
+    @Setter
+    @Getter
+    private Long id = 1L;
 
     @GetMapping
     public Collection<Film> findAll() {

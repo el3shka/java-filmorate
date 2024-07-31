@@ -37,7 +37,7 @@ public class UserService {
 
 
     public User update(User newUser) {
-        if (newUser.getId() == 0) {
+        if (newUser.getId() == null) {
             log.error("Не указан Id пользователя");
             throw new ValidationException("Id должен быть указан");
         }
@@ -149,7 +149,7 @@ public class UserService {
                 .stream()
                 .mapToInt(id -> id)
                 .max()
-                .orElse(0);
+                .orElse(1);
         return ++currentMaxId;
     }
 }
