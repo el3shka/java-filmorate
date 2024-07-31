@@ -16,6 +16,7 @@ import java.util.List;
 public class FilmController {
     private final FilmService filmService;
     protected Long id;
+
     {
         id = 1L;
     }
