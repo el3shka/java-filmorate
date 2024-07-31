@@ -17,7 +17,6 @@ import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
@@ -41,7 +40,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongRealiseData() {
-		final Film film = new Film(1, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
+		final Film film = new Film(0, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
 				LocalDate.of(1800, 1, 1), 100);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -76,14 +75,8 @@ class FilmorateApplicationTests {
 	}
 
 	@Test
-	void testUserIdAssignment() {
-		User user = new User(0, "test@example.com", "login", "Name", LocalDate.of(1990, 1, 1));
-		assertEquals(1, user.getId(), "ID должен быть равен 1, если был передан 0");
-	}
-
-	@Test
 	void wrongEmail() {
-		User user = new User(0,"pochtaya.ru", "login", "Виталя",
+		User user = new User(null,"pochtaya.ru", "login", "Виталя",
 				LocalDate.of(1993, 5, 12));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
@@ -101,7 +94,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void emptyLogin() {
-		User user = new User(0, "123@ya.ru", "", "Виталя",
+		User user = new User(1, "123@ya.ru", "", "Виталя",
 				LocalDate.of(1990, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
@@ -110,7 +103,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongBirthday() {
-		User user = new User(0, "123@ya.ru", "login", "Виталя",
+		User user = new User(1, "123@ya.ru", "login", "Виталя",
 				LocalDate.of(2120, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),

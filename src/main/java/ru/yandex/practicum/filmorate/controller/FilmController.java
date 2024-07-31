@@ -15,6 +15,10 @@ import java.util.List;
 @RequestMapping("/films")
 public class FilmController {
     private final FilmService filmService;
+    protected Long id;
+    {
+        id = 1L;
+    }
 
     @GetMapping
     public Collection<Film> findAll() {

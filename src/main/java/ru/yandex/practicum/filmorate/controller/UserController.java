@@ -12,6 +12,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    protected Long id;
+    {
+        id = 1L;
+    }
 
     @GetMapping
     public List<User> findAll() {
