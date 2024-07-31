@@ -40,7 +40,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongRealiseData() {
-		final Film film = new Film(0, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
+		final Film film = new Film(null, "Бойцовский клуб", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни.",
 				LocalDate.of(1800, 1, 1), 100);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -49,7 +49,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongDescription() {
-		final Film film = new Film(1, "Интересный фильм", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни. Однажды в очередной командировке он встречает некоего Тайлера Дёрдена — харизматического торговца мылом с извращенной философией. Тайлер уверен, что самосовершенствование — удел слабых, а единственное, ради чего стоит жить, — саморазрушение.",
+		final Film film = new Film(null, "Интересный фильм", "Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни. Однажды в очередной командировке он встречает некоего Тайлера Дёрдена — харизматического торговца мылом с извращенной философией. Тайлер уверен, что самосовершенствование — удел слабых, а единственное, ради чего стоит жить, — саморазрушение.",
 				LocalDate.of(2011, 1, 13), 139);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -58,7 +58,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void emptyName() {
-		final Film film = new Film(1, "", "Описание фильма",
+		final Film film = new Film(null, "", "Описание фильма",
 				LocalDate.of(2016, 1, 1), 100);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -67,7 +67,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongDuration() {
-		final Film film = new Film(1, "", "Описание фильма",
+		final Film film = new Film(null, "", "Описание фильма",
 				LocalDate.of(2016, 1, 1), -200);
 		assertThrows(ValidationException.class, () ->
 						filmController.create(film),
@@ -76,7 +76,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongEmail() {
-		User user = new User(1, "pochtaya.ru", "login", "Виталя",
+		User user = new User(null, "pochtaya.ru", "login", "Виталя",
 				LocalDate.of(1993, 5, 12));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
@@ -85,7 +85,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void emptyEmail() {
-		User user = new User(0, null, "login", "Виталя",
+		User user = new User(null, null, "login", "Виталя",
 				LocalDate.of(1990, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),
@@ -103,7 +103,7 @@ class FilmorateApplicationTests {
 
 	@Test
 	void wrongBirthday() {
-		User user = new User(1, "123@ya.ru", "login", "Виталя",
+		User user = new User(null, "123@ya.ru", "login", "Виталя",
 				LocalDate.of(2120, 10, 8));
 		assertThrows(ValidationException.class, () ->
 						userController.create(user),

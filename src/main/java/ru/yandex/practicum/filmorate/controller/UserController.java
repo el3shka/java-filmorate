@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.user.UserService;
+
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -15,13 +17,13 @@ public class UserController {
 
     @GetMapping
     public List<User> findAll() {
-        return (List<User>) userService.findAll();
+        return userService.findAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody User user) {
-        userService.create(user);
+    public User create(@RequestBody User user) {
+        return userService.create(user);
     }
 
     @PutMapping
