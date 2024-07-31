@@ -15,10 +15,15 @@ public class User {
     Set<Integer> friends = new HashSet<>();
 
     public User(Integer id, String email, String login, String name, LocalDate birthday) {
-        this.id = id;
+        if (id == 0) {
+            this.id = 1; // Если ID равен 0, устанавливаем его равным 1
+        } else {
+            this.id = id;
+        }
+        this.birthday = birthday;
         this.email = email;
         this.login = login;
         this.name = name;
-        this.birthday = birthday;
     }
 }
+

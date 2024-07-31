@@ -37,7 +37,7 @@ public class UserService {
 
 
     public User update(User newUser) {
-        if (newUser.getId() == null) {
+        if (newUser.getId() == 0) {
             log.error("Не указан Id пользователя");
             throw new ValidationException("Id должен быть указан");
         }
