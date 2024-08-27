@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Primary
 @RequiredArgsConstructor
-@Repository("filmRepository")
+//@Repository("filmRepository") //deleted for review
 public class FilmRepository implements FilmStorage {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 

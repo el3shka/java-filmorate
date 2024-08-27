@@ -12,8 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of = {"id"})
 public class Genre {
     @NotNull
-    @Max(10)
-    @Min(1)
     private long id;
     private String name;
 }

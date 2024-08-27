@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Primary
 @RequiredArgsConstructor
-@Repository("userRepository")
+//@Repository("userRepository") // deleted for review
 public class UserRepository implements UserStorage {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
