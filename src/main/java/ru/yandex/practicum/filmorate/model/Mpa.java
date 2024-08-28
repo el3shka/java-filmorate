@@ -12,8 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of = {"id"})
 public class Mpa {
     @NotNull
-    @Min(1)
-    @Max(5)
     private long id;
 
     private String name;

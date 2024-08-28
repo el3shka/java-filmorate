@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 @Configuration
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @ComponentScan(basePackages = "ru.yandex.practicum.filmorate")
-public class FilmRepositoryApplicationTests {
+class FilmRepositoryApplicationTests {
     private final FilmRepository filmRepository;
     Film film;
 

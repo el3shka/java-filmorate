@@ -18,7 +18,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
+@SpringBootTest(classes = FilmControllerTests.class)
 public class FilmControllerTests {
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
