@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.mapper.FilmRowMapper;
 import ru.yandex.practicum.filmorate.mapper.GenreRowMapper;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Primary
 @RequiredArgsConstructor
-//@Repository("filmRepository") //deleted for review
+@Repository("filmRepository") //deleted for review
 public class FilmRepository implements FilmStorage {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
