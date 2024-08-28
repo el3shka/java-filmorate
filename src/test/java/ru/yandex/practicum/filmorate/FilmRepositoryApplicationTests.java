@@ -23,7 +23,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @JdbcTest
-//@AutoConfigureTestDatabase
+@AutoConfigureTestDatabase
 @Configuration
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @ComponentScan(basePackages = "ru.yandex.practicum.filmorate")
