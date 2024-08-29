@@ -9,4 +9,6 @@ public interface GenreStorage {
     Optional<Genre> getGenre(Long id);
 
     List<Genre> getGenres();
+
+    List<Genre> getGenresList(List<Long> ids);
 }

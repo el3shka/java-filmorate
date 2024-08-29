@@ -4,14 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.repository.FilmStorage;
 import ru.yandex.practicum.filmorate.repository.GenreStorage;
 import ru.yandex.practicum.filmorate.repository.MpaStorage;
 import ru.yandex.practicum.filmorate.repository.UserStorage;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -24,7 +26,8 @@ public class FilmService {
     private final MpaStorage mpaRepository;
 
     public Film createFilm(Film film) {
-        film = filmRepository.add(film);
+        Film film1 = filmValidate(film);
+        film = filmRepository.add(film1);
 
         log.info("Film created: {}", film);
         return film;
@@ -35,8 +38,8 @@ public class FilmService {
             log.info("Film update failed: {}", film);
             throw new NotFoundException("Film with name " + film.getName() + " does not exist yet");
         }
-
-        film = filmRepository.update(film);
+        Film film1 = filmValidate(film);
+        film = filmRepository.update(film1);
 
         log.info("Film updated: {}", film);
         return film;
@@ -88,6 +91,27 @@ public class FilmService {
 
     public void deleteFilm(long id) {
         filmRepository.delete(id);
+    }
+
+    private Film filmValidate(final Film film) {
+        if (Objects.nonNull(film.getMpa())) {
+            film.setMpa(mpaRepository.getName(film.getMpa().getId())
+                    .orElseThrow(() -> new ValidationException("Рейтинг введён некорректно."))
+            );
+        }
+        if (Objects.nonNull(film.getGenres())) {
+            List<Long> idGenres = film.getGenres().stream().map(Genre::getId).toList();
+            LinkedHashSet<Genre> genres = genreRepository.getGenresList(idGenres).stream()
+                    .sorted(Comparator.comparing(Genre::getId)).collect(Collectors.toCollection(LinkedHashSet::new));
+            if (film.getGenres().size() == genres.size()) {
+                film.getGenres().clear();
+                film.setGenres(genres);
+            } else {
+                log.warn("Жанр введен некорректно.");
+                throw new ValidationException("Жанр введен некорректно.");
+            }
+        }
+        return film;
     }
 
 }

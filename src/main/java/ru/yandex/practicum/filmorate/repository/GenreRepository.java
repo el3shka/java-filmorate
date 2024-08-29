@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import ru.yandex.practicum.filmorate.mapper.GenreRowMapper;
 import ru.yandex.practicum.filmorate.model.Genre;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -31,9 +33,18 @@ public class GenreRepository implements GenreStorage {
         }
     }
 
-
     @Override
     public List<Genre> getGenres() {
         return jdbcTemplate.query(SELECT_ALL_GENRES, new GenreRowMapper());
+    }
+
+    @Override
+    public List<Genre> getGenresList(List<Long> ids) {
+        String sql = "SELECT * FROM genres WHERE id IN (:id);";
+        return jdbcTemplate.query(sql, Map.of("id", ids), genreRowMapper());
+    }
+
+    private RowMapper<Genre> genreRowMapper() {
+        return (rs, rowNum) -> new Genre(rs.getInt("id"), rs.getString("name"));
     }
 }
