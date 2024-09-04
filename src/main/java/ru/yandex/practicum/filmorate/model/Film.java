@@ -1,30 +1,49 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.yandex.practicum.filmorate.validation.annotation.ReleaseDate;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-
-@Getter
-@Setter
-@ToString
+/**
+ * Film.
+ */
+@Data
+@NoArgsConstructor
 public class Film {
-    private Integer id;
-    private String name;
-    private String description;
-    private LocalDate releaseDate;
-    private Integer duration;
-    Set<Integer> likes = new HashSet<>();
+    private long id;
 
-    public Film(Integer id, String name, String description, LocalDate releaseDate, Integer duration) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
-    }
+    @NotNull
+    @NotBlank
+    private String name;
+
+    @Size(min = 1, max = 200)
+    private String description;
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @ReleaseDate(earliestDate = "1895-12-28")
+    @NotNull
+    private LocalDate releaseDate;
+
+    @Min(1)
+    private int duration;
+
+    private Set<Long> likes = new LinkedHashSet<>();
+
+    @NotNull
+    @Valid
+    private Mpa mpa;
+
+    @Valid
+    Set<Genre> genres = new LinkedHashSet<>();
 }
